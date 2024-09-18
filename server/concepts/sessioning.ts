@@ -21,6 +21,10 @@ export default class SessioningConcept {
     // to explicitly allocate a session; we only need to keep track of the user.
 
     // TODO: Make sure the user is logged out before allowing a new session to start.
+    if (session.user !== undefined) {
+      throw new UnauthenticatedError("Current user must be logged out!")
+    }
+
     // Hint: Take a look at how the "end" function makes sure the user is logged in. Keep in mind that a
     // synchronization like starting a session should just consist of a series of actions that may throw
     // exceptions and should not have its own control flow.
@@ -39,7 +43,7 @@ export default class SessioningConcept {
 
   isLoggedIn(session: SessionDoc) {
     if (session.user === undefined) {
-      throw new UnauthenticatedError("Must be logged in!");
+      throw new UnauthenticatedError("Must be logged!");
     }
   }
 }
